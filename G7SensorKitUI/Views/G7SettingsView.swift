@@ -46,6 +46,36 @@ struct G7SettingsView: View {
 
         return formatter
     }()
+    
+    private var sensorExpirationFullFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("E, MMM d, hh:mm")
+        return formatter
+    }()
+    
+    private var sensorExpirationRelativeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        formatter.doesRelativeDateFormatting = true
+        return formatter
+    }()
+    
+    private var sensorExpirationRelativeFormatterWithTime: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .short
+        formatter.doesRelativeDateFormatting = true
+        return formatter
+    }()
+    
+    private var sensorExpirationAbsoluteFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        formatter.doesRelativeDateFormatting = false
+        return formatter
+    }()
 
     var body: some View {
         List {
@@ -59,31 +89,64 @@ struct G7SettingsView: View {
                 HStack {
                     Text(LocalizedString("Sensor Start", comment: "title for g7 settings row showing sensor start time"))
                     Spacer()
-                    Text(timeFormatter.string(from: activatedAt))
-                        .foregroundColor(.secondary)
+                    if sensorExpirationRelativeFormatter.string(from: activatedAt) == sensorExpirationAbsoluteFormatter.string(from: activatedAt) {
+                        Text(sensorExpirationFullFormatter.string(from: activatedAt))
+                            .foregroundColor(.secondary)
+                    } else {
+                        Text(sensorExpirationRelativeFormatterWithTime.string(from: activatedAt))
+                            .foregroundColor(.secondary)
+                    }
                 }
                 HStack {
                     Text(LocalizedString("Sensor Expiration", comment: "title for g7 settings row showing sensor expiration time"))
                     Spacer()
-                    Text(timeFormatter.string(from: activatedAt.addingTimeInterval(G7Sensor.lifetime)))
-                        .foregroundColor(.secondary)
+                    if sensorExpirationRelativeFormatter.string(from: activatedAt.addingTimeInterval(G7Sensor.lifetime)) == sensorExpirationAbsoluteFormatter.string(from: activatedAt.addingTimeInterval(G7Sensor.lifetime)) {
+                        Text(sensorExpirationFullFormatter.string(from: activatedAt.addingTimeInterval(G7Sensor.lifetime)))
+                            .foregroundColor(.secondary)
+                    } else {
+                        Text(sensorExpirationRelativeFormatterWithTime.string(from: activatedAt.addingTimeInterval(G7Sensor.lifetime)))
+                            .foregroundColor(.secondary)
+                    }
                 }
                 HStack {
                     Text(LocalizedString("Grace Period End", comment: "title for g7 settings row showing sensor grace period end time"))
                     Spacer()
-                    Text(timeFormatter.string(from: activatedAt.addingTimeInterval(G7Sensor.lifetime + G7Sensor.gracePeriod)))
-                        .foregroundColor(.secondary)
+                    if sensorExpirationRelativeFormatter.string(from: activatedAt.addingTimeInterval(G7Sensor.lifetime + G7Sensor.gracePeriod)) == sensorExpirationAbsoluteFormatter.string(from: activatedAt.addingTimeInterval(G7Sensor.lifetime + G7Sensor.gracePeriod)) {
+                        Text(sensorExpirationFullFormatter.string(from: activatedAt.addingTimeInterval(G7Sensor.lifetime + G7Sensor.gracePeriod)))
+                            .foregroundColor(.secondary)
+                    } else {
+                        Text(sensorExpirationRelativeFormatterWithTime.string(from: activatedAt.addingTimeInterval(G7Sensor.lifetime + G7Sensor.gracePeriod)))
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
 
             Section("Last Reading") {
-                LabeledValueView(label: LocalizedString("Glucose", comment: "Field label"),
-                                 value: viewModel.lastGlucoseString)
-                LabeledDateView(label: LocalizedString("Time", comment: "Field label"),
-                                date: viewModel.latestReadingTimestamp,
-                                dateFormatter: viewModel.dateFormatter)
-                LabeledValueView(label: LocalizedString("Trend", comment: "Field label"),
-                                 value: viewModel.lastGlucoseTrendString)
+                HStack {
+                    Text(LocalizedString("Glucose", comment: "title for g7 settings row showing last sensor glucose reading"))
+                    Spacer()
+                    Text(viewModel.lastGlucoseString)
+                        .foregroundColor(.secondary)
+                }
+                HStack {
+                    Text(LocalizedString("Time", comment: "title for g7 settings row showing time of last sensor reading"))
+                    Spacer()
+                    if let latestReadingTimestamp = viewModel.latestReadingTimestamp {
+                        if sensorExpirationRelativeFormatter.string(from: latestReadingTimestamp) == sensorExpirationAbsoluteFormatter.string(from: latestReadingTimestamp) {
+                            Text(sensorExpirationFullFormatter.string(from: latestReadingTimestamp))
+                                .foregroundColor(.secondary)
+                        } else {
+                            Text(sensorExpirationRelativeFormatterWithTime.string(from: latestReadingTimestamp))
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                HStack {
+                    Text(LocalizedString("Trend", comment: "title for g7 settings row showing last sensor glucose trend"))
+                    Spacer()
+                    Text(viewModel.lastGlucoseTrendString)
+                        .foregroundColor(.secondary)
+                }
             }
 
             Section("Bluetooth") {
@@ -113,8 +176,20 @@ struct G7SettingsView: View {
                     }
                 }
                 if let lastConnect = viewModel.lastConnect {
-                    LabeledValueView(label: LocalizedString("Last Connect", comment: "title for g7 settings row showing sensor last connect time"),
-                                     value: timeFormatter.string(from: lastConnect))
+                    HStack {
+                        Text(LocalizedString("Last Connect", comment: "title for g7 settings row showing sensor last connect time"))
+                        Spacer()
+                        if sensorExpirationRelativeFormatter.string(from: lastConnect) == sensorExpirationAbsoluteFormatter.string(from: lastConnect) {
+                            Text(sensorExpirationFullFormatter.string(from: lastConnect))
+                                .foregroundColor(.secondary)
+                        } else {
+                            Text(sensorExpirationRelativeFormatterWithTime.string(from: lastConnect))
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    
+                    //LabeledValueView(label: LocalizedString("Last Connect", comment: "title for g7 settings row showing sensor last connect time"),
+                    //                 value: timeFormatter.string(from: lastConnect))
                 }
             }
 
