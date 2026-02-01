@@ -978,6 +978,12 @@
             "value" : "Ajustes"
           }
         },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurare"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1107,6 +1113,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Conectado"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conectat"
           }
         },
         "ru" : {
@@ -1240,6 +1252,12 @@
             "value" : "Conectando"
           }
         },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se conectează"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1369,6 +1387,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuați"
           }
         },
         "ru" : {
@@ -1775,6 +1799,12 @@
             "value" : "Fine"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ferdig"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1803,6 +1833,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Realizat"
           }
         },
         "ru" : {
@@ -2005,7 +2041,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "葡萄糖"
+            "value" : "血糖"
           }
         }
       }
@@ -2082,7 +2118,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oppvarming ferdig"
+            "value" : "Reserveperiode utløpt"
           }
         },
         "nb-NO" : {
@@ -2237,7 +2273,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gjenstående oppvarmingsperiode"
+            "value" : "Reserveperiode utløper om"
           }
         },
         "nb-NO" : {
@@ -2613,7 +2649,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Last Connect"
+            "value" : "上次连接"
           }
         }
       }
@@ -3440,6 +3476,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Scanning"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se scanează"
           }
         },
         "ru" : {
